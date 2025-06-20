@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Personaggi - Il Nuovo Mondo</title>
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+        body {
+            background-color:  #111;
+            color: #eee;
+            font-family: "Georgia", serif;
+        }
+
+        header {
+            background-color: #222;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #c2b280;
+        }
+
+        nav a {
+            color: #eee;
+            margin-left: 1rem;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h2 {
+            margin-top: 2rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+            color: #c2b280;
+        }
+
+        .personaggio {
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #1c1c1c;
+            color: #eee;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .personaggio:hover {
+            background-color: #2a2a2a;
+        }
+
+        .personaggio img {
+            max-width: 200px;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .ritratto {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ritratto img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+
+        .slogan {
+            font-style: italic;
+            color: #c2b280;
+            max-width: 400px;
+            margin-left: 5rem;
+        }
+
+        .info {
+            display: none;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #555;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Personaggi - Il Nuovo Mondo</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="personaggi.html">Personaggi</a></li>
+                <li><a href="mappa.html">Mappa</a></li>
+                <li><a href="lore.html">Lore</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Personaggi Principali</h2>
+        
+        <!-- Draxel -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Draxel</h3>
+            <div class="ritratto">
+                <img src="../assets/draxel.png" alt="Draxel">
+                <h2 class="slogan">Colui che ha spezzato la Trama</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Dragonide</p>
+                <p><strong>Classe:</strong> Stregone</p>
+                <p><strong>Descrizione:</strong> Draxel è nato e cresciuto sui Monti Ogalduk, tra la sua gente
+                del clan. Fin da piccolo ha capito di essere affine alla magia, di poter manipolare la trama; più il tempo passava, però,
+                più Draxel capiva che non poteva controllare la Trama con cui riusciva a giocare. </p>
+                <p>Tra vittime indesiderate dei suoi stessi poteri e continui sbalzi d'umore, 
+                Draxel ha continuato a servire il suo clan. Ha poi conosciuto la Compagnia, con cui ora è in viaggio per cercare di fermare il malefico piano di Vorak Nyxara.</p>
+            </div>
+        </div>
+
+        <!-- Micar -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Draxel</h3>
+            <div class="ritratto">
+                <img src="../assets/micar.png" alt="Micar">
+                <h2 class="slogan">La Spada di Eilistrae</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Elfo Drow</p>
+                <p><strong>Classe:</strong> Paladino</p>
+                <p><strong>Descrizione:</strong> A Menzoberranzan, Im'Locar serviva la sua dea Lolth. Eilistrae lo ha chiamato: dal buio, lo ha portato a vedere la luce.</p>
+                <p>Da quel giorno prese il nome di Micar'Yraen. Da quel giorno è stato imprigionato per centinaia di anni. Fino a che non fu liberato. Partì in viaggio, verso una nuova terra...</p>
+                <p>Conosciuta la Compagnia, Micar ha dovuto superare molti ostacoli che hanno provato a compromettere la sua fede in Eilistrae. Più di tutti, la Maschera di Valdrek il Senza Volto.</p>
+                <p>Con la maschera di Ishus ancora addosso, simbolo dei drow di Isothar; imbracciando Tiris e Luneth, armi di Ethelindor, simbolo degli elfi di Vingaldrum; con gli occhi di Eilistrae, e la benedizione della dea nel villaggio nascosto, ed infine con le arti e la cultura tipica dei drow di Lolth...</p>
+                <p>Micar porta con sé il fardello di tutti gli elfi del Nuovo Mondo.</p>
+            </div>
+        </div>
+
+
+        <!-- Ludwig -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Ludwig</h3>
+            <div class="ritratto">
+                <img src="../assets/ludwig.png" alt="Ludwig">
+                <h2 class="slogan">Tra Libertà e Morte</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Umano</p>
+                <p><strong>Classe:</strong> Ladro</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Danvar -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Danvar</h3>
+            <div class="ritratto">
+                <img src="../assets/danvar.png" alt="Danvar">
+                <h2 class="slogan">Il portatore della Fiamma</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Halfling</p>
+                <p><strong>Classe:</strong> Warlock</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Balok -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Balok</h3>
+            <div class="ritratto">
+                <img src="../assets/balok.png" alt="Balok">
+                <h2 class="slogan">Lo Scudo di Eilistrae</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Elfo Drow</p>
+                <p><strong>Classe:</strong> Chierico</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Thogar -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Thogar</h3>
+            <div class="ritratto">
+                <img src="../assets/thogar.png" alt="Thogar">
+                <h2 class="slogan">L'Eco delle Montagne</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Goliath</p>
+                <p><strong>Classe:</strong> Barbaro</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Inferion -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Inferion</h3>
+            <div class="ritratto">
+                <img src="../assets/inferion.png" alt="Inferion">
+                <h2 class="slogan">Il Fuoco che Arde tra gli Abissi</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Tiefling</p>
+                <p><strong>Classe:</strong> Druido</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>@ 2025 - Campagna creata da Manuel Nepa</p>
+    </footer>
+
+    <script>
+        function toggleInfo(element) {
+            const info = element.querySelector(".info");
+            info.style.display = (info.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</body>
+</html>

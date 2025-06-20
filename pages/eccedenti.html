@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gli Dei Eccedenti - Il Nuovo Mondo</title>
+    <link rel="stylesheet" href="../style.css" />
+
+    <style>
+        body {
+            background-color:  #111;
+            color: #eee;
+            font-family: "Georgia", serif;
+        }
+
+        header {
+            background-color: #222;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #c2b280;
+        }
+
+        nav a {
+            color: #eee;
+            margin-left: 1rem;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 2rem;
+        }
+
+        h2 {
+            margin-top: 2rem;
+            border-bottom: 2px solid #444;
+            padding-bottom: 0.5rem;
+            color: #c2b280;
+        }
+
+        .personaggio {
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background-color: #1c1c1c;
+            color: #eee;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .personaggio:hover {
+            background-color: #2a2a2a;
+        }
+
+        .personaggio img {
+            max-width: 200px;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .ritratto {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .ritratto img {
+            max-width: 200px;
+            border-radius: 8px;
+        }
+
+        .slogan {
+            font-style: italic;
+            color: #c2b280;
+            max-width: 400px;
+            margin-left: 5rem;
+        }
+
+        .info {
+            display: none;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid #555;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Personaggi - Il Nuovo Mondo</h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="personaggi.html">Personaggi</a></li>
+                <li><a href="mappa.html">Mappa</a></li>
+                <li><a href="lore.html">Lore</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Gli Dei Eccedenti</h2>
+        
+        <!-- Athesto -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Athesto</h3>
+            <div class="ritratto">
+                <img src="../assets/athesto.png" alt="Athesto">
+                <h2 class="slogan">Dio della Vendetta e della Guerra </h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Zyrakth -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Zyrakth</h3>
+            <div class="ritratto">
+                <img src="../assets/zyrakth.png" alt="Zyrakth">
+                <h2 class="slogan">Dio della Morte e del Caos</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Aeloris -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Aeloris</h3>
+            <div class="ritratto">
+                <img src="../assets/aeloris.png" alt="Aeloris">
+                <h2 class="slogan"> Dea dell'Amore e della Bontà</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Nyra -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Nyra</h3>
+            <div class="ritratto">
+                <img src="../assets/nyra.png" alt="Nyra">
+                <h2 class="slogan"> Dea della Pace e del Perdono</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Druvalon -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Druvalon</h3>
+            <div class="ritratto">
+                <img src="../assets/druvalon.png" alt="Druvalon">
+                <h2 class="slogan"> Dio della Libertà</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Kaelon -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Kaelon</h3>
+            <div class="ritratto">
+                <img src="../assets/kaelon.png" alt="Kaelon">
+                <h2 class="slogan"> Dio della Storia e della Tradizione</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Lunareth -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Lunareth</h3>
+            <div class="ritratto">
+                <img src="../assets/lunareth.png" alt="Lunareth">
+                <h2 class="slogan"> Dea dell'Omicidio e della Corruzione</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Vorithys -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Vorithys</h3>
+            <div class="ritratto">
+                <img src="../assets/vorithis.png" alt="Vorithys">
+                <h2 class="slogan"> Dio della Tirannia e dell'Odio</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Xalora -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Xalora</h3>
+            <div class="ritratto">
+                <img src="../assets/xalora.png" alt="Xalora">
+                <h2 class="slogan"> Dea del Terrore e dell'Anarchia</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Zyphira -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Zyphira</h3>
+            <div class="ritratto">
+                <img src="../assets/zyphira.png" alt="Zyphira">
+                <h2 class="slogan"> Dea dell'Oppressione e della Conquista</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Mithrarovan -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Mithrarovan</h3>
+            <div class="ritratto">
+                <img src="../assets/mithrarovan.png" alt="Mithrarovan">
+                <h2 class="slogan"> Dio della Gloria e del Riconoscimento</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+        <!-- Valinthera -->
+        <div class="personaggio" onclick="toggleInfo(this)">
+            <h3>Valinthera</h3>
+            <div class="ritratto">
+                <img src="../assets/valinthera.png" alt="Valinthera">
+                <h2 class="slogan"> Dea della Speranza</h2>
+            </div>
+            
+            <div class="info">
+                <p><strong>Razza:</strong> Sconosciuta</p>
+                <p><strong>Classe:</strong> Divinità</p>
+                <p><strong>Descrizione:</strong> </p>
+                <p></p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>@ 2025 - Campagna creata da Manuel Nepa</p>
+    </footer>
+
+    <script>
+        function toggleInfo(element) {
+            const info = element.querySelector(".info");
+            info.style.display = (info.style.display === "block") ? "none" : "block";
+        }
+    </script>
+</body>
+</html>
