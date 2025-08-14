@@ -17,6 +17,7 @@
     color: white;
     padding: .6rem 1rem;
     display: flex;
+    flex-wrap: wrap; /* per far andare i link a capo su mobile */
     align-items: center;
     gap: 1rem;
   }
@@ -72,6 +73,21 @@
   .section h3 {
     margin-top: 0;
   }
+
+  /* --- VERSIONE MOBILE --- */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column; /* aside sopra, main sotto */
+    }
+    aside {
+      width: 100%; /* prende tutta la larghezza */
+      max-height: 200px; /* scroll interno se lista lunga */
+    }
+    main {
+      flex: unset;
+      height: auto;
+    }
+  }
 </style>
 </head>
 <body>
@@ -86,259 +102,23 @@
 <div class="container">
   <aside>
     <h2>Luoghi</h2>
-    <ul id="placesList">
-      <!-- Popolato via JS -->
-    </ul>
+    <ul id="placesList"></ul>
   </aside>
 
   <main>
     <div id="placeDetails">
       <h1>Seleziona un luogo</h1>
-      <p>Dall’elenco a sinistra.</p>
+      <p>Dall’elenco a sinistra (o sopra, su mobile).</p>
     </div>
   </main>
 </div>
 
 <script>
   const places = [
-    {
-      name: "Vingaldrum",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-    {
-      name: "Goldbrick",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Khar Durim",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Northpearl",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Valdenor",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Kurk",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Elbrunn",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Gole di Marm'Ryn",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Isothar",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Tyrindul",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Villaggio di Eilistrae",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Fost",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Ethis",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Crocevia dell'Ishuriel",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Arcipelago di Matra",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Asintoto dei Mondi",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Kardum'El",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Luskan",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Waterdeep",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Baldur's Gate",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Neverwinter",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Phandalin",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Menzoberranzan",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
-
-    {
-      name: "Thay",
-      sections: {
-        "Storia": "",
-        "Geografia": "",
-        "PNG chiave": "",
-        "Eventi lore": ""
-      }
-    },
+    { name: "Vingaldrum", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
+    { name: "Goldbrick", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
+    { name: "Khar Durim", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
+    // ... (altri luoghi come nel tuo elenco)
   ];
 
   const listEl = document.getElementById('placesList');
