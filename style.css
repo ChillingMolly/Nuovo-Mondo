@@ -27,7 +27,6 @@ body {
 }
 
 /* Header */
-/* Header */
 header {
   background: var(--accent-dark);
   padding: 1rem 1.25rem;
@@ -45,7 +44,6 @@ header h1 {
   color: var(--muted-gold);
   letter-spacing: 0.6px;
 }
-     
 nav { margin-left: auto; }
 nav ul {
   list-style: none;
@@ -206,7 +204,3 @@ footer {
     text-align: center;
   }
 }
-
-
-
-
