@@ -224,6 +224,24 @@
   const container = document.getElementById('container');
   const menuToggle = document.getElementById('menuToggle');
 
+  // Lista di nomi/località da evidenziare (grassetto) all'interno dei paragrafi.
+  // Puoi aggiungere o rimuovere nomi qui liberamente.
+  const highlightNames = [
+    "Palazzo di Ethelindor",
+    "Casa delle Rose",
+    "Forgiargento",
+    "Altarion",
+    "Kurkhael",
+    "Biblioteca di Velarithan",
+    "Velarithan",
+    "Albero Cantante",
+    "Piazza Centrale",
+    "Pozza d'Argento",
+    "Giardini di Lynthariel",
+    "Torre di Velyanor",
+    "Santuario delle Radici"
+  ];
+
   // genera lista
   places.forEach((place, idx) => {
     const li = document.createElement('li');
@@ -232,14 +250,110 @@
     listEl.appendChild(li);
   });
 
+  // escape regex util
+  function escapeRegex(s) {
+    return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  // crea un <p> che contiene nodi testo + <strong> per i nomi trovati
+  function createParagraphWithHighlights(text, names) {
+    const p = document.createElement('p');
+    if (!names || names.length === 0) { p.textContent = text; return p; }
+
+    const sorted = [...names].sort((a,b)=>b.length - a.length);
+    const pattern = sorted.map(escapeRegex).join('|');
+    const re = new RegExp(pattern, 'g');
+
+    let lastIndex = 0;
+    let match;
+    while ((match = re.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        p.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const strong = document.createElement('strong');
+      strong.textContent = match[0];
+      p.appendChild(strong);
+      lastIndex = re.lastIndex;
+    }
+    if (lastIndex < text.length) {
+      p.appendChild(document.createTextNode(text.slice(lastIndex)));
+    }
+    return p;
+  }
+
+  // showPlace: renderizza usando nodi DOM (crea paragrafi da \n\n, evidenzia nomi, gestisce link eventi)
   function showPlace(index) {
     const place = places[index];
-    detailsEl.innerHTML = `
-      <h1>${place.name}</h1>
-      <img src="${place.image}" alt="${place.name}" class="place-image" />
-    ` + Object.entries(place.sections).map(([title, content]) =>
-        `<div class="section"><h3>${title}</h3><p>${content}</p></div>`
-      ).join('');
+
+    // pulisce
+    detailsEl.innerHTML = '';
+
+    // titolo e immagine
+    const h1 = document.createElement('h1');
+    h1.textContent = place.name;
+    detailsEl.appendChild(h1);
+
+    const img = document.createElement('img');
+    img.src = place.image || '';
+    img.alt = place.name;
+    img.className = 'place-image';
+    detailsEl.appendChild(img);
+
+    // per evidenziare nomi usiamo highlightNames + eventualmente i nomi dei luoghi principali presenti tra i places
+    const globalPlaceNames = places.map(p => p.name);
+    const namesToHighlight = Array.from(new Set([...highlightNames, ...globalPlaceNames]));
+
+    // scorri le sezioni nell'ordine originale dell'oggetto
+    for (const [title, content] of Object.entries(place.sections)) {
+      const sectionDiv = document.createElement('div');
+      sectionDiv.className = 'section';
+
+      const h3 = document.createElement('h3');
+      h3.textContent = title;
+      sectionDiv.appendChild(h3);
+
+      // Eventi lore: se è un array -> crea lista e parse degli <a> se presenti
+      if (Array.isArray(content)) {
+        const ul = document.createElement('ul');
+        content.forEach(item => {
+          const li = document.createElement('li');
+
+          // prova a estrarre <a href="...">label</a> se l'item è una stringa HTML
+          if (typeof item === 'string') {
+            const match = item.match(/<a\s+href=["']([^"']+)["']\s*>([^<]+)<\/a>/i);
+            if (match) {
+              const a = document.createElement('a');
+              a.href = match[1];
+              a.textContent = match[2];
+              li.appendChild(a);
+              ul.appendChild(li);
+              return;
+            }
+          }
+
+          // fallback: testo semplice
+          li.textContent = (typeof item === 'string') ? item : JSON.stringify(item);
+          ul.appendChild(li);
+        });
+        sectionDiv.appendChild(ul);
+      } else if (typeof content === 'string') {
+        // suddivide in paragrafi su doppio newline (o più)
+        const paragraphs = content.split(/\n{2,}/);
+        paragraphs.forEach(par => {
+          const cleaned = par.trim();
+          if (cleaned.length === 0) return;
+          const p = createParagraphWithHighlights(cleaned, namesToHighlight);
+          sectionDiv.appendChild(p);
+        });
+      } else {
+        // altri tipi (oggetto) -> visualizza in JSON sintetico
+        const pre = document.createElement('pre');
+        pre.textContent = JSON.stringify(content, null, 2);
+        sectionDiv.appendChild(pre);
+      }
+
+      detailsEl.appendChild(sectionDiv);
+    }
 
     // se siamo su schermo piccolo, chiudi automaticamente il menu per mostrare i dettagli a schermo intero
     if (window.innerWidth <= 768) {
@@ -252,7 +366,6 @@
   // toggle manuale del menu
   menuToggle.addEventListener('click', () => {
     const isClosed = container.classList.toggle('menu-closed');
-    // aggiorna attributo aria e testo del bottone
     menuToggle.setAttribute('aria-expanded', isClosed ? 'false' : 'true');
     menuToggle.textContent = isClosed ? '☰ Luoghi' : '✕ Chiudi';
   });
@@ -260,12 +373,3 @@
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
