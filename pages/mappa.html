@@ -35,11 +35,35 @@
     text-decoration: underline;
     color: #ffd700;
   }
+
+  /* --- PULSANTE MENU (minima aggiunta) --- */
+  #menuToggle {
+    margin-left: auto; /* spinge il bottone a destra */
+    background: linear-gradient(#ffd97a, #d4af37);
+    border: 2px solid rgba(0,0,0,0.15);
+    color: #3b2f1c;
+    padding: .25rem .6rem;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+  }
+  #menuToggle:active { transform: translateY(1px); }
+
   .container {
     flex: 1;
     display: flex;
     overflow: hidden;
   }
+
+  /* quando la container ha questa classe, nascondiamo l'aside */
+  .container.menu-closed aside {
+    display: none;
+  }
+
   aside {
     width: 250px;
     background: rgba(60, 40, 20, 0.9);
@@ -108,19 +132,27 @@
       width: 100%;
       max-height: 200px;
     }
+    /* su mobile il pulsante rimane visibile; portalo più evidente */
+    #menuToggle {
+      margin-left: 0;
+      order: 1;
+    }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <a href="home.html">Home</a>
+  <a href="index.html">Home</a>
   <a href="personaggi.html">Personaggi</a>
   <a href="lore.html">Lore</a>
   <a href="mappa.html">Mappa</a>
+
+  <!-- pulsante di toggle aggiunto (minima modifica) -->
+  <button id="menuToggle" aria-expanded="true" aria-controls="placesList">☰ Luoghi</button>
 </header>
 
-<div class="container">
+<div class="container" id="container">
   <aside>
     <h2>Luoghi</h2>
     <ul id="placesList"></ul>
@@ -175,7 +207,10 @@
 
   const listEl = document.getElementById('placesList');
   const detailsEl = document.getElementById('placeDetails');
+  const container = document.getElementById('container');
+  const menuToggle = document.getElementById('menuToggle');
 
+  // genera lista
   places.forEach((place, idx) => {
     const li = document.createElement('li');
     li.textContent = place.name;
@@ -191,12 +226,23 @@
     ` + Object.entries(place.sections).map(([title, content]) =>
         `<div class="section"><h3>${title}</h3><p>${content}</p></div>`
       ).join('');
+
+    // se siamo su schermo piccolo, chiudi automaticamente il menu per mostrare i dettagli a schermo intero
+    if (window.innerWidth <= 768) {
+      container.classList.add('menu-closed');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.textContent = '☰ Luoghi';
+    }
   }
+
+  // toggle manuale del menu
+  menuToggle.addEventListener('click', () => {
+    const isClosed = container.classList.toggle('menu-closed');
+    // aggiorna attributo aria e testo del bottone
+    menuToggle.setAttribute('aria-expanded', isClosed ? 'false' : 'true');
+    menuToggle.textContent = isClosed ? '☰ Luoghi' : '✕ Chiudi';
+  });
 </script>
 
 </body>
 </html>
-
-
-
-
