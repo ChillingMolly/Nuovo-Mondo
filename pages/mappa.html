@@ -123,6 +123,12 @@
     color: #5c3b1e;
   }
 
+  /* Stile per elenco Luoghi Importanti: nome sottolineato solo qui */
+  .luoghi-list { margin: 0 0 0 1rem; padding-left: 0; }
+  .luoghi-list li { margin-bottom: .6rem; }
+  .luogo-name { text-decoration: underline; font-weight: normal; display: inline-block; margin-bottom: 6px; color: #3b2f1c; }
+  .luogo-desc { margin: 6px 0 0 0; color: #3b2f1c; }
+
   /* --- Mobile --- */
   @media (max-width: 768px) {
     .container {
@@ -168,21 +174,65 @@
 
 <script>
   const places = [
-    { name: "Vingaldrum", image: "../assets/vingaldrum.png", sections: { 
-      "Storia": "Anticamente, Ethelindor ed i suoi compagni giunsero nel Nord, per cercare una nuova terra. Arrivati dinanzi all'Albero Cantante, Ethelindor fu messo alla prova dalla Dea Thalindra. Fronteggiò e sconfisse il Guardiano dell'Albero Cantante. Fu così che Ethelindor divenne campione di Thalindra, e la dea gli donò una gemma verde: attorno ad essa sarebbe sorta la città. Nacque dapprima Velarithan, la Città delle Radici. Lì, gli elfi iniziarono a costruire case, centri, ad ampliare quello che era soltanto un piccolo villaggio.\n\nNacque Vingaldrum nel giorno in cui Ethelindor ampliò i confini del villaggio sui Monti dei Saggi: lì fu costruito il Palazzo di Ethelindor e ufficialmente incoronato il primo re degli elfi.\n\nPochi anni dopo, con l'avvento di Valdenor, scoppiò una guerra tra i due elfi e le due città: Vingaldrum fu quasi interamente distrutta, Ethelindor e i suoi uomini si rifugiarono a Velarithan. A fine guerra, però, Ethelindor riuscì nel contrattacco e Vingaldrum ne emerse vittoriosa.\n\nAd Ethelindor successe al trono la sorella Ethelindra, che guidò con saggezza ed eleganza il suo popolo. Al contrario del fratello, che fu più un condottiero valoroso, Ethelindra fu da sempre  un'abile negoziatrice, che portò Vingaldrum allo splendore.\n\nDopo la morte di Ethelindra, salì al trono Lae'Noriel. In un periodo in cui i Cappucci Grigi iniziavano a mettere i bastoni fra le ruote della città, Lae'Noriel fronteggiò la minaccia diplomatica di Goldbrick: volendo mantenere l'indipendenza, Vingaldrum fu la prima città occupata con la forza da Nuova Fost.",
-      
-      "Geografia": "Vingaldrum si trova a 2 giorni di viaggio verso sud da Khar Durim e 4 da Goldbrick. E' attraversata da un lungo fiume, che nasce dai Monti Ogalduk e sfocia nel Mare senza Traccia. Si estende sui Monti dei Saggi, due colli uno accanto all'altro.", 
-      
-      "Organizzazioni e Fazioni": "Vingaldrum è governata dal Lord d'Argento. Monarchia ereditaria, è il Re a scegliere il suo successore al trono. I sovrani sono affiancati da un consigliere (ora Mythalor). Per molto tempo fu importante all'interno di Vingaldrum la fazione dei Cappucci Grigi: elfi che si rifacevano a Tal'Noriel e desideravano l'indipendenza incondizionata della città dalla pesante burocrazia di Nuova Fost. La fazione dei Cappucci Grigi era capitanata da Tal'Noriel e, con la sua morte, è andata a disperdersi.", 
-
-      "Luoghi Importanti": "Il Palazzo di Ethelindor è l'imponente castello che domina Vingaldrum, sede del potere reale. Sale decorate con intarsi che raccontano la fondazione della città; terrazze che guardano i boschi. Centro amministrativo e giudiziario, lì si svolgono udienze pubbliche, consigli di guerra, negoziati diplomatici, cerimonie. La Casa delle Rose è la dimora malinconica e curata dove Ethelindra visse. E' preceduta da un giardino di rose sempre fiorite. Luogo di memoria e rituali familiari, è meta di pellegrinaggi intimi (vedove, giovani reali che cercano consiglio), centro per archiviare lettere e ricordi di corte. La Forgiargento è la grande bottega-forgia di Thalion. Lì, Thalion produce e ripara armi, armature e utensili; punto di incontro per mercanti e avventurieri che commissionano equipaggiamenti. Si dice che Thalion faccia anche lezioni ai giovani elfi di Vingaldrum che sono interessati al suo mestiere. L'Altarion è il complesso sacro dedicato a Thalindra, dea della natura. In passato, vi era la Gemma Verde di Ethelindor; oggi al centro sorge il Kurkhael, frutto della Battaglia Fantasma. Lì, si svolgono riti sacri, cerimonie stagionali, meditazioni curate dalle sacerdotesse; funzioni di guarigione, esorcismi locali e veglie per i caduti. Il Kurkhael è al contempo benedizione e monito: attira pellegrini, studiosi e cultisti. La Biblioteca di Velarithan è un colossale archivio di pergamene, volumi rilegati e tomi magici. Ricca di scaffali a più livelli, sale di lettura. Lì è conservato il sapere, la ricerca accademica, l'istruzione per i giovani elfi. E' anche luogo di incontro per maghi, cartografi e cronisti. Velarithan è la città antica dalla quale nacque Vingaldrum. Insieme di edifici vecchi, nessun punto d'interesse al suo interno. L'Albero Cantante è un antico albero, luogo legato a Thalindra. Il primo albero a svegliarsi del bosco, è meta di pellegrini e degli apprendisti del Canto Sacro; luogo di prove spirituali e riti d'iniziazione. Lì si trova il temibile Guardiano, legato a Thalindra. La Piazza Centrale è il cuore vitale della città: bancarelle, messaggeri e locande. E' il punto di incontro di culture, merci e voci. Lì vi è il commercio quotidiano, mercato delle spezie e degli intagli, annunci pubblici e celebrazioni cittadine. Qui è stato ucciso Tal'Noriel. Al centro della Piazza Centrale, vi è quello che rimane della Pozza d'Argento.",
-      
-      "Eventi lore": [
-      '<a href="lore.html#evento-battaglia-fantasma">Battaglia Fantasma</a>',
-      '<a href="lore.html#evento-esecuzione-talnoriel">Esecuzione di Tal Noriel</a>'
-   ]} },
-
-    
+    {
+      name: "Vingaldrum",
+      image: "../assets/vingaldrum.png",
+      sections: {
+        "Storia": "Anticamente, Ethelindor ed i suoi compagni giunsero nel Nord, per cercare una nuova terra. Arrivati dinanzi all'Albero Cantante, Ethelindor fu messo alla prova dalla Dea Thalindra. Fronteggiò e sconfisse il Guardiano dell'Albero Cantante. Fu così che Ethelindor divenne campione di Thalindra, e la dea gli donò una gemma verde: attorno ad essa sarebbe sorta la città. Nacque dapprima Velarithan, la Città delle Radici. Lì, gli elfi iniziarono a costruire case, centri, ad ampliare quello che era soltanto un piccolo villaggio.\n\nNacque Vingaldrum nel giorno in cui Ethelindor ampliò i confini del villaggio sui Monti dei Saggi: lì fu costruito il Palazzo di Ethelindor e ufficialmente incoronato il primo re degli elfi.\n\nPochi anni dopo, con l'avvento di Valdenor, scoppiò una guerra tra i due elfi e le due città: Vingaldrum fu quasi interamente distrutta, Ethelindor e i suoi uomini si rifugiarono a Velarithan. A fine guerra, però, Ethelindor riuscì nel contrattacco e Vingaldrum ne emerse vittoriosa.\n\nAd Ethelindor successe al trono la sorella Ethelindra, che guidò con saggezza ed eleganza il suo popolo. Al contrario del fratello, che fu più un condottiero valoroso, Ethelindra fu da sempre un'abile negoziatrice, che portò Vingaldrum allo splendore.\n\nDopo la morte di Ethelindra, salì al trono Lae'Noriel. In un periodo in cui i Cappucci Grigi iniziavano a mettere i bastoni fra le ruote della città, Lae'Noriel fronteggiò la minaccia diplomatica di Goldbrick: volendo mantenere l'indipendenza, Vingaldrum fu la prima città occupata con la forza da Nuova Fost.",
+        "Geografia": "Vingaldrum si trova a 2 giorni di viaggio verso sud da Khar Durim e 4 da Goldbrick. E' attraversata da un lungo fiume, che nasce dai Monti Ogalduk e sfocia nel Mare senza Traccia. Si estende sui Monti dei Saggi, due colli uno accanto all'altro.",
+        "Organizzazioni e Fazioni": "Vingaldrum è governata dal Lord d'Argento. Monarchia ereditaria, è il Re a scegliere il suo successore al trono. I sovrani sono affiancati da un consigliere (ora Mythalor). Per molto tempo fu importante all'interno di Vingaldrum la fazione dei Cappucci Grigi: elfi che si rifacevano a Tal'Noriel e desideravano l'indipendenza incondizionata della città dalla pesante burocrazia di Nuova Fost. La fazione dei Cappucci Grigi era capitanata da Tal'Noriel e, con la sua morte, è andata a disperdersi.",
+        "Luoghi Importanti": [
+          {
+            name: "Palazzo di Ethelindor",
+            description: "Imponente castello che domina Vingaldrum, sede del potere reale. Sale decorate con intarsi che raccontano la fondazione della città; terrazze che guardano i boschi. Centro amministrativo e giudiziario: qui si svolgono udienze pubbliche, consigli di guerra, negoziati diplomatici e cerimonie. Residenza ufficiale del Re Lae'Noriel."
+          },
+          {
+            name: "Casa delle Rose",
+            description: "Dimora malinconica e curata, preceduta da un giardino di rose sempre fiorite. Era la residenza di Ethelindra, la regina madre; oggi è mantenuta come memoriale e luogo di contemplazione, oltre che deposito di lettere e ricordi di corte."
+          },
+          {
+            name: "Forgiargento",
+            description: "Grande bottega-forgia attorno alla Piazza Centrale, gestita da Thalion. Qui si producono e riparano armi, armature e utensili; luogo d'incontro per mercanti e avventurieri e spazio di apprendistato per giovani fabbri."
+          },
+          {
+            name: "Altarion",
+            description: "Enorme complesso sacro dedicato a Thalindra, situato poco prima dei Monti dei Saggi. Un tempo giardino di luce; oggi al centro sorge il Kurkhael (l'Albero del Sangue), memoria della Battaglia Fantasma. Luogo di riti sacri, cerimonie stagionali, veglie e funzioni di guarigione."
+          },
+          {
+            name: "Biblioteca di Velarithan",
+            description: "Colossale archivio di pergamene, volumi rilegati e tomi magici: sede degli Archivisti di Luce. Qui si svolgono ricerca accademica, studio e catalogazione della storia elfica."
+          },
+          {
+            name: "Velarithan",
+            description: "La città antica dalla quale nacque Vingaldrum: insieme di edifici vecchi che custodiscono memoria e archivi. Non ha punti di interesse moderni come la capitale, ma resta nucleo storico e culturale."
+          },
+          {
+            name: "Albero Cantante",
+            description: "Antico albero qualche chilometro fuori città, con corteccia argentea che emette suoni e armonie. Meta di pellegrinaggi e degli apprendisti del Canto Sacro; luogo di prove spirituali e riti d'iniziazione. Protetto dal temibile Guardiano legato a Thalindra."
+          },
+          {
+            name: "Piazza Centrale",
+            description: "Cuore vitale della città: bancarelle, messaggeri, locande e artisti di strada. Punto di incontro per mercati, annunci pubblici e celebrazioni cittadine. È anche il luogo della Pozza d'Argento; qui in passato fu ucciso Tal'Noriel."
+          },
+          {
+            name: "Giardini di Lynthariel",
+            description: "Ampie aree botaniche e serre dove crescono specie rare e piante magiche, curate dalle sacerdotesse di Thalindra. Forniscono erbe medicinali e piante rituali."
+          },
+          {
+            name: "Torre di Velyanor",
+            description: "Torre degli incantatori e dei Veggenti: punto di osservazione stellare, laboratorio magico e centro per la manutenzione delle barriere difensive arcane della città."
+          },
+          {
+            name: "Santuario delle Radici",
+            description: "Cripte antiche sotto Velarithan che custodiscono tombe degli antenati e reliquie della fondazione. Luogo sacro usato per rituali ancestrali e, occasionalmente, ricerche clandestine."
+          }
+        ],
+        "Eventi lore": [
+          '<a href="lore.html#evento-battaglia-fantasma">Battaglia Fantasma</a>',
+          '<a href="lore.html#evento-esecuzione-talnoriel">Esecuzione di Tal Noriel</a>'
+        ]
+      }
+    },
     { name: "Goldbrick", image: "../assets/goldbrick.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
     { name: "Khar Durim", image: "../assets/khardurim.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
     { name: "Laboratorio", image: "../assets/laboratorio.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
@@ -214,8 +264,7 @@
     { name: "Monti Ogal'duk", image: "../assets/ogalduk.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
     { name: "Calimport", image: "../assets/calimport.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
     { name: "Labirinto", image: "../assets/labirinto.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
-    { name: "Aragon", image: "../assets/aragon.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } },
-  
+    { name: "Aragon", image: "../assets/aragon.png", sections: { "Storia": "", "Geografia": "", "PNG chiave": "", "Eventi lore": "" } }
     // Aggiungi altri luoghi qui...
   ];
 
@@ -223,24 +272,6 @@
   const detailsEl = document.getElementById('placeDetails');
   const container = document.getElementById('container');
   const menuToggle = document.getElementById('menuToggle');
-
-  // Lista di nomi/località da evidenziare (grassetto) all'interno dei paragrafi.
-  // Puoi aggiungere o rimuovere nomi qui liberamente.
-  const highlightNames = [
-    "Palazzo di Ethelindor",
-    "Casa delle Rose",
-    "Forgiargento",
-    "Altarion",
-    "Kurkhael",
-    "Biblioteca di Velarithan",
-    "Velarithan",
-    "Albero Cantante",
-    "Piazza Centrale",
-    "Pozza d'Argento",
-    "Giardini di Lynthariel",
-    "Torre di Velyanor",
-    "Santuario delle Radici"
-  ];
 
   // genera lista
   places.forEach((place, idx) => {
@@ -250,38 +281,19 @@
     listEl.appendChild(li);
   });
 
-  // escape regex util
+  // utilità escape regex
   function escapeRegex(s) {
     return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
 
-  // crea un <p> che contiene nodi testo + <strong> per i nomi trovati
-  function createParagraphWithHighlights(text, names) {
+  // crea un paragrafo semplice (senza evidenziazioni automatiche)
+  function createParagraph(text) {
     const p = document.createElement('p');
-    if (!names || names.length === 0) { p.textContent = text; return p; }
-
-    const sorted = [...names].sort((a,b)=>b.length - a.length);
-    const pattern = sorted.map(escapeRegex).join('|');
-    const re = new RegExp(pattern, 'g');
-
-    let lastIndex = 0;
-    let match;
-    while ((match = re.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        p.appendChild(document.createTextNode(text.slice(lastIndex, match.index)));
-      }
-      const strong = document.createElement('strong');
-      strong.textContent = match[0];
-      p.appendChild(strong);
-      lastIndex = re.lastIndex;
-    }
-    if (lastIndex < text.length) {
-      p.appendChild(document.createTextNode(text.slice(lastIndex)));
-    }
+    p.textContent = text;
     return p;
   }
 
-  // showPlace: renderizza usando nodi DOM (crea paragrafi da \n\n, evidenzia nomi, gestisce link eventi)
+  // showPlace: renderizza usando nodi DOM (paragrafi da \n\n, elenco luoghi con nome sottolineato)
   function showPlace(index) {
     const place = places[index];
 
@@ -299,10 +311,6 @@
     img.className = 'place-image';
     detailsEl.appendChild(img);
 
-    // per evidenziare nomi usiamo highlightNames + eventualmente i nomi dei luoghi principali presenti tra i places
-    const globalPlaceNames = places.map(p => p.name);
-    const namesToHighlight = Array.from(new Set([...highlightNames, ...globalPlaceNames]));
-
     // scorri le sezioni nell'ordine originale dell'oggetto
     for (const [title, content] of Object.entries(place.sections)) {
       const sectionDiv = document.createElement('div');
@@ -311,6 +319,80 @@
       const h3 = document.createElement('h3');
       h3.textContent = title;
       sectionDiv.appendChild(h3);
+
+      // GESTIONE SPECIALE: Luoghi Importanti come elenco con nome sottolineato
+      if (title === "Luoghi Importanti") {
+        if (Array.isArray(content)) {
+          const ul = document.createElement('ul');
+          ul.className = 'luoghi-list';
+          content.forEach(item => {
+            const li = document.createElement('li');
+            // ogni item è {name, description}
+            if (item && typeof item === 'object' && item.name) {
+              const nameSpan = document.createElement('span');
+              nameSpan.className = 'luogo-name';
+              nameSpan.textContent = item.name;
+              li.appendChild(nameSpan);
+
+              if (item.description) {
+                const desc = document.createElement('p');
+                desc.className = 'luogo-desc';
+                desc.textContent = item.description;
+                li.appendChild(desc);
+              }
+            } else {
+              // fallback: se è stringa
+              li.appendChild(createParagraph(String(item)));
+            }
+            ul.appendChild(li);
+          });
+          sectionDiv.appendChild(ul);
+        } else if (typeof content === 'string') {
+          // split e render come elenco se fosse rimasta una stringa
+          const rawItems = content.split(/\n{2,}|;\s+|(?<=\.)\s+(?=[A-ZÀ-Ý])/);
+          const ul = document.createElement('ul');
+          ul.className = 'luoghi-list';
+          rawItems.forEach(raw => {
+            const trimmed = raw.trim().replace(/^\./, '').trim();
+            if (!trimmed) return;
+            const li = document.createElement('li');
+            // prova a estrarre un titolo breve fino a " — " o ":"
+            let titlePart = trimmed;
+            let descPart = '';
+            const sepMatch = trimmed.match(/^([^—:-]+)[—:-]\s*(.+)$/);
+            if (sepMatch) {
+              titlePart = sepMatch[1].trim();
+              descPart = sepMatch[2].trim();
+            } else {
+              // se la frase è lunga, prova a dividere al primo punto
+              const firstDot = trimmed.indexOf('.');
+              if (firstDot > 30) { // titolo piuttosto lungo? allora non tagliare
+              } else if (firstDot > 0 && firstDot < 60) {
+                titlePart = trimmed.slice(0, firstDot + 1).trim();
+                descPart = trimmed.slice(firstDot + 1).trim();
+              }
+            }
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'luogo-name';
+            nameSpan.textContent = titlePart;
+            li.appendChild(nameSpan);
+            if (descPart) {
+              const p = document.createElement('p');
+              p.className = 'luogo-desc';
+              p.textContent = descPart;
+              li.appendChild(p);
+            }
+            ul.appendChild(li);
+          });
+          sectionDiv.appendChild(ul);
+        } else {
+          const pre = document.createElement('pre');
+          pre.textContent = JSON.stringify(content, null, 2);
+          sectionDiv.appendChild(pre);
+        }
+        detailsEl.appendChild(sectionDiv);
+        continue;
+      }
 
       // Eventi lore: se è un array -> crea lista e parse degli <a> se presenti
       if (Array.isArray(content)) {
@@ -336,22 +418,27 @@
           ul.appendChild(li);
         });
         sectionDiv.appendChild(ul);
-      } else if (typeof content === 'string') {
-        // suddivide in paragrafi su doppio newline (o più)
+        detailsEl.appendChild(sectionDiv);
+        continue;
+      }
+
+      // le sezioni testuali (Storia/Geografia/Fazioni): split su doppio newline per creare paragrafi
+      if (typeof content === 'string') {
         const paragraphs = content.split(/\n{2,}/);
         paragraphs.forEach(par => {
           const cleaned = par.trim();
           if (cleaned.length === 0) return;
-          const p = createParagraphWithHighlights(cleaned, namesToHighlight);
-          sectionDiv.appendChild(p);
+          const pEl = createParagraph(cleaned);
+          sectionDiv.appendChild(pEl);
         });
-      } else {
-        // altri tipi (oggetto) -> visualizza in JSON sintetico
-        const pre = document.createElement('pre');
-        pre.textContent = JSON.stringify(content, null, 2);
-        sectionDiv.appendChild(pre);
+        detailsEl.appendChild(sectionDiv);
+        continue;
       }
 
+      // altri tipi (oggetto) -> visualizza in JSON sintetico
+      const pre = document.createElement('pre');
+      pre.textContent = JSON.stringify(content, null, 2);
+      sectionDiv.appendChild(pre);
       detailsEl.appendChild(sectionDiv);
     }
 
