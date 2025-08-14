@@ -26,24 +26,6 @@ body {
   line-height: 1.55;
 }
 
-/* Header */
-header {
-  background: var(--accent-dark);
-  padding: 1rem 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 4px solid var(--gold);
-  color: var(--muted-gold);
-  font-family: 'Cinzel', serif;
-  flex-wrap: wrap;
-}
-header h1 {
-  margin: 0;
-  font-size: 1.25rem;
-  color: var(--muted-gold);
-  letter-spacing: 0.6px;
-}
 nav { margin-left: auto; }
 nav ul {
   list-style: none;
@@ -204,3 +186,4 @@ footer {
     text-align: center;
   }
 }
+
