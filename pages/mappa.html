@@ -3,13 +3,35 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Luoghi della Campagna</title>
+<title>Mappa della Campagna</title>
 <style>
   body {
     margin: 0;
     font-family: system-ui, sans-serif;
     display: flex;
+    flex-direction: column;
     height: 100vh;
+  }
+  header {
+    background: #2b2b2b;
+    color: white;
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  header a:hover {
+    text-decoration: underline;
+  }
+  .container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
   }
   aside {
     width: 250px;
@@ -38,13 +60,14 @@
     flex: 1;
     padding: 1rem;
     overflow-y: auto;
+    background: #f5f5f5;
   }
-  .hidden { display: none; }
   .section {
     margin-bottom: 1rem;
     padding: .8rem;
-    background: #f7f7f7;
+    background: white;
     border-radius: .5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   }
   .section h3 {
     margin-top: 0;
@@ -53,40 +76,269 @@
 </head>
 <body>
 
-<aside>
-  <h2>Luoghi</h2>
-  <ul id="placesList">
-    <!-- Popolato via JS -->
-  </ul>
-</aside>
+<header>
+  <a href="home.html">Home</a>
+  <a href="personaggi.html">Personaggi</a>
+  <a href="lore.html">Lore</a>
+  <a href="mappa.html">Mappa</a>
+</header>
 
-<main>
-  <div id="placeDetails">
-    <h1>Seleziona un luogo</h1>
-    <p>Dall’elenco a sinistra.</p>
-  </div>
-</main>
+<div class="container">
+  <aside>
+    <h2>Luoghi</h2>
+    <ul id="placesList">
+      <!-- Popolato via JS -->
+    </ul>
+  </aside>
+
+  <main>
+    <div id="placeDetails">
+      <h1>Seleziona un luogo</h1>
+      <p>Dall’elenco a sinistra.</p>
+    </div>
+  </main>
+</div>
 
 <script>
   const places = [
     {
       name: "Vingaldrum",
       sections: {
-        "Storia": "Fondata secoli fa dagli elfi alti, veneranti la dea Thalindra.",
-        "Geografia": "Città tra le colline verdi e le foreste millenarie.",
-        "PNG chiave": "Altharion il Saggio, Lyris la Custode.",
-        "Eventi recenti": "Celebrazione del Ritorno della Luna."
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
       }
     },
     {
-      name: "Altare di Lolth",
+      name: "Goldbrick",
       sections: {
-        "Storia": "Luogo di culto oscuro della Legione delle Mille Fenditure.",
-        "Geografia": "In una caverna colossale, illuminata da funghi viola.",
-        "PNG chiave": "Sacerdotessa Zyrthra.",
-        "Eventi recenti": "Rituale interrotto da un gruppo di avventurieri."
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
       }
-    }
+    },
+
+    {
+      name: "Khar Durim",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Northpearl",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Valdenor",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Kurk",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Elbrunn",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Gole di Marm'Ryn",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Isothar",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Tyrindul",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Villaggio di Eilistrae",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Fost",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Ethis",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Crocevia dell'Ishuriel",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Arcipelago di Matra",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Asintoto dei Mondi",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Kardum'El",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Luskan",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Waterdeep",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Baldur's Gate",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Neverwinter",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Phandalin",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Menzoberranzan",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
+
+    {
+      name: "Thay",
+      sections: {
+        "Storia": "",
+        "Geografia": "",
+        "PNG chiave": "",
+        "Eventi lore": ""
+      }
+    },
   ];
 
   const listEl = document.getElementById('placesList');
