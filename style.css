@@ -24,7 +24,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.55;
-  -webkit-touch-callout: none;
 }
 
 /* Header */
@@ -37,6 +36,7 @@ header {
   border-bottom: 4px solid var(--gold);
   color: var(--muted-gold);
   font-family: 'Cinzel', serif;
+  flex-wrap: wrap;
 }
 header h1 {
   margin: 0;
@@ -52,6 +52,7 @@ nav ul {
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 nav a {
   color: var(--muted-gold);
@@ -90,7 +91,7 @@ h2 {
 /* Lists and items */
 main ul {
   margin: 0 0 1.8rem 0;
-  padding-left: 0; /* we'll style items as blocks */
+  padding-left: 0;
 }
 main ul h3 {
   margin: 0 0 .5rem 0;
@@ -103,7 +104,7 @@ main ul li {
   list-style: none;
 }
 
-/* Replace blue links with fancy button-like links */
+/* Link button style */
 main a {
   color: var(--text-brown);
   background: var(--card-bg);
@@ -125,13 +126,11 @@ main a:focus {
   border-color: rgba(0,0,0,0.08);
   outline: none;
 }
-
-/* Make sure visited links don't turn blue */
 main a:visited {
   color: var(--text-brown);
 }
 
-/* Cards style for groupings if needed */
+/* Cards */
 .card {
   border: 2px solid var(--gold);
   border-radius: 10px;
@@ -148,7 +147,6 @@ footer {
   margin-top: 2rem;
   border-top: 3px solid rgba(0,0,0,0.05);
   color: rgba(0,0,0,0.55);
-  background: transparent;
   font-size: .95rem;
 }
 
@@ -161,10 +159,17 @@ footer {
 /* Responsive */
 @media (max-width: 900px) {
   main { padding: 1.25rem; }
-  nav ul { gap: .8rem; }
+  nav ul { gap: .8rem; flex-direction: column; align-items: flex-start; }
+  nav a { display: block; width: 100%; }
 }
 @media (max-width: 480px) {
-  header { padding: .75rem; }
-  h2 { font-size: 1.15rem; }
-  main a { padding: .4rem .6rem; font-size: .98rem; }
+  header { padding: .75rem; flex-direction: column; align-items: flex-start; }
+  header h1 { font-size: 1.05rem; }
+  h2 { font-size: 1.1rem; text-align: center; }
+  main a { 
+    padding: .4rem .6rem; 
+    font-size: .95rem; 
+    display: block; 
+    text-align: center;
+  }
 }
