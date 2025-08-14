@@ -7,96 +7,146 @@
     <link rel="stylesheet" href="../style.css" />
 
     <style>
-        body {
-            background-color:  #111;
-            color: #eee;
-            font-family: "Georgia", serif;
-        }
+  /* Tema pergamena / fantasy con nuovi font più leggibili */
+  body {
+    margin: 0;
+    font-family: 'Cormorant Garamond', serif; /* <-- nuovo font per il corpo */
+    background: #f6f1e1 url('parchment-bg.jpg') repeat;
+    color: #3b2f1c;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-        header {
-            background-color: #222;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  header {
+    background: #5c3b1e;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #d4af37;
+    font-family: 'Cinzel', serif; /* titolo/menu con carattere epico ma leggibile */
+  }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: #c2b280;
-        }
+  header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #f3e5ab;
+    font-family: 'Cinzel', serif;
+  }
 
-        nav a {
-            color: #eee;
-            margin-left: 1rem;
-            text-decoration: none;
-        }
+  nav a {
+    color: #f3e5ab;
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: 'Cinzel', serif;
+  }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+  nav a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+  }
 
-        main {
-            padding: 2rem;
-        }
+  main {
+    padding: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    font-size: 1rem; /* regola la dimensione dei testi qui se vuoi più grande/piccolo */
+    line-height: 1.55;
+  }
 
-        h2 {
-            margin-top: 2rem;
-            border-bottom: 2px solid #444;
-            padding-bottom: 0.5rem;
-            color: #c2b280;
-        }
+  h2 {
+    margin-top: 2rem;
+    border-bottom: 3px solid #d4af37;
+    padding-bottom: 0.5rem;
+    color: #5c3b1e;
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+  }
 
-        .personaggio {
-            border: 1px solid #444;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            background-color: #1c1c1c;
-            color: #eee;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+  /* Personaggi / card in stile fantasy coerente */
+  .personaggio {
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.92);
+    color: #3b2f1c;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    font-family: 'Cormorant Garamond', serif;
+  }
 
-        .personaggio:hover {
-            background-color: #2a2a2a;
-        }
+  .personaggio:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  }
 
-        .personaggio img {
-            max-width: 200px;
-            border-radius: 8px;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
+  .personaggio img {
+    max-width: 200px;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 0.5rem;
+    border: 3px solid #d4af37;
+  }
 
-        .ritratto {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
+  .ritratto {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
 
-        .ritratto img {
-            max-width: 200px;
-            border-radius: 8px;
-        }
+  .ritratto img {
+    max-width: 200px;
+    border-radius: 8px;
+    border: 3px solid #d4af37;
+  }
 
-        .slogan {
-            font-style: italic;
-            color: #c2b280;
-            max-width: 400px;
-            margin-left: 5rem;
-        }
+  .slogan {
+    font-style: italic;
+    color: #c2b280;
+    max-width: 400px;
+    margin-left: 0;
+    font-family: 'Cormorant Garamond', serif;
+  }
 
-        .info {
-            display: none;
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px solid #555;
-        }
+  /* Sezione con dettagli nascosti (toggle) */
+  .info {
+    display: none;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    font-family: 'Cormorant Garamond', serif;
+  }
 
-    </style>
+  .info.visible {
+    display: block;
+    animation: fadeIn 0.16s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Responsività minima */
+  @media (max-width: 768px) {
+    .ritratto {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .personaggio img, .ritratto img {
+      max-width: 100%;
+      width: 180px;
+    }
+    main {
+      padding: 1rem;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -381,6 +431,7 @@
     </script>
 </body>
 </html>
+
 
 
 
