@@ -3,48 +3,201 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lore & Eventi</title>
+<title>Lore & Eventi — Vingaldrum</title>
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cardo&display=swap" rel="stylesheet">
 <style>
+  :root{
+    --paper-bg: #f6f1e1;
+    --ink: #3b2f1c;
+    --accent: #d4af37;
+    --card-bg: rgba(255,255,255,0.92);
+    --muted: #6f5b45;
+    --glass: rgba(255,255,255,0.65);
+  }
+  html,body{height:100%}
   body {
     margin: 0;
     font-family: 'Cardo', serif;
-    background: #f6f1e1 url('parchment-bg.jpg') repeat;
-    color: #3b2f1c;
+    background: var(--paper-bg) url('parchment-bg.jpg') repeat;
+    color: var(--ink);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
   }
+
+  /* Header */
   header {
     background: #5c3b1e;
     color: white;
     padding: .6rem 1rem;
     display: flex;
     gap: 1rem;
-    border-bottom: 4px solid #d4af37;
+    align-items: center;
+    border-bottom: 4px solid var(--accent);
     font-family: 'MedievalSharp', cursive;
+    position: sticky;
+    top: 0;
+    z-index: 20;
   }
-  header a {
-    color: #f3e5ab;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  header a:hover {
-    text-decoration: underline;
-    color: #ffd700;
-  }
+  header a{ color:#f3e5ab; text-decoration:none; font-weight:bold }
+  header a:hover{ color:#ffd700; text-decoration:underline }
+
   main {
-    max-width: 900px;
-    margin: auto;
-    padding: 1rem;
+    max-width: 1100px;
+    margin: 1.2rem auto;
+    padding: 0 1rem 3rem;
   }
-  h1, h2 {
-    font-family: 'MedievalSharp', cursive;
+
+  .hero {
+    display:flex;
+    gap:1rem;
+    align-items:center;
+    margin-bottom:1rem;
+  }
+  .hero h1{
+    margin:0;
+    font-family:'MedievalSharp',cursive;
     color: #5c3b1e;
+    font-size:2.0rem;
   }
-  .event {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: rgba(255,255,255,0.85);
-    border: 2px solid #d4af37;
-    border-radius: .5rem;
+  .hero p { margin:0; color:var(--muted); font-size:0.95rem }
+
+  /* Controls */
+  .controls {
+    display:flex;
+    gap:.6rem;
+    margin: .9rem 0 1.2rem;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+  .search {
+    flex:1 1 360px;
+    display:flex;
+    gap:.5rem;
+    align-items:center;
+  }
+  .search input{
+    flex:1;
+    padding:.6rem .8rem;
+    border-radius:8px;
+    border:2px solid rgba(0,0,0,0.06);
+    background:var(--glass);
+    font-size:1rem;
+    color:var(--ink);
+  }
+  .select, .btn {
+    padding:.5rem .7rem;
+    border-radius:8px;
+    border:2px solid rgba(0,0,0,0.06);
+    background:linear-gradient(#fff,#faf5e6);
+    cursor:pointer;
+    font-weight:600;
+  }
+
+  /* Grid of events */
+  .grid {
+    display:grid;
+    gap:1rem;
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+  @media (max-width:880px){ .grid{ grid-template-columns: 1fr } }
+
+  /* Card */
+  article.event {
+    background: var(--card-bg);
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: .9rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.10);
+    transition: transform .18s ease, box-shadow .18s ease;
+    overflow: hidden;
+  }
+  article.event:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+  }
+
+  .event-head{
+    display:flex;
+    gap:.75rem;
+    align-items:flex-start;
+  }
+  .event-icon{
+    width:46px;
+    height:46px;
+    background:linear-gradient(180deg,#fff,#f3e5ab);
+    border-radius:8px;
+    border:2px solid rgba(0,0,0,0.06);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    box-shadow: inset 0 -6px 8px rgba(0,0,0,0.03);
+  }
+  .event-title {
+    margin:0;
+    font-family:'MedievalSharp',cursive;
+    color:#4a2f16;
+    font-size:1.1rem;
+  }
+  .meta {
+    margin-top:.25rem;
+    color:var(--muted);
+    font-size:.9rem;
+  }
+
+  .chips { margin-left:auto; display:flex; gap:.4rem; flex-wrap:wrap; align-items:center; }
+  .chip {
+    padding:.18rem .45rem;
+    font-size:.78rem;
+    border-radius:999px;
+    border:1px solid rgba(0,0,0,0.06);
+    background: linear-gradient(#fff,#f7f1dd);
+    color:var(--ink);
+  }
+
+  /* Body: preview + details */
+  .preview {
+    margin-top:.85rem;
+    color:var(--ink);
+    line-height:1.5;
+  }
+  details { margin-top:.8rem; }
+  details summary {
+    cursor:pointer;
+    list-style:none;
+    padding:.4rem .5rem;
+    border-radius:6px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));
+    border:1px solid rgba(0,0,0,0.04);
+  }
+  details[open] summary { box-shadow: inset 0 -3px 6px rgba(0,0,0,0.03); }
+
+  .implicazioni { margin-top:.6rem; color:var(--muted) }
+
+  /* small decorative timeline dot (for left-aligned display) */
+  .timeline {
+    display:flex;
+    gap:.6rem;
+    align-items:flex-start;
+  }
+  .dot {
+    width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:6px;
+  }
+
+  /* empty state */
+  .empty {
+    text-align:center;
+    color:var(--muted);
+    padding:2rem;
+    border-radius:8px;
+    background: rgba(255,255,255,0.6);
+    border:1px dashed rgba(0,0,0,0.05);
+  }
+
+  /* small responsive tweaks */
+  @media (max-width:480px){
+    .hero { flex-direction:column; align-items:flex-start }
+    .search { width:100% }
   }
 </style>
 </head>
@@ -58,28 +211,203 @@
 </header>
 
 <main>
-  <h1>Eventi Lore</h1>
+  <div class="hero">
+    <div>
+      <h1>Eventi Lore</h1>
+      <p>Racconti, svolte storiche e momenti che hanno segnato Vingaldrum e il suo mondo. Usa la ricerca per filtrare per titolo, luogo o tag.</p>
+    </div>
+  </div>
 
-  <section id="evento-battaglia-fantasma" class="event">
-    <h2>La Battaglia Fantasma</h2>
-    <p><strong>Luogo:</strong> Vingaldrum</p>
-    <p><strong>Descrizione:</strong> </p>
-    <p><strong>Implicazioni:</strong> </p>
+  <div class="controls" aria-hidden="false">
+    <div class="search" role="search">
+      <input id="q" placeholder="Cerca evento, luogo, tag..." aria-label="Cerca eventi">
+      <button class="btn" id="clearBtn" title="Svuota ricerca">Cancella</button>
+    </div>
+
+    <select id="filterPlace" class="select" aria-label="Filtra per luogo">
+      <option value="">Tutti i luoghi</option>
+      <option value="Vingaldrum">Vingaldrum</option>
+      <option value="Goldbrick">Goldbrick</option>
+      <!-- aggiungi più opzioni dinamicamente se vuoi -->
+    </select>
+
+    <button id="toggleView" class="btn" title="Mostra/Nascondi dettagli">Mostra/Nascondi dettagli</button>
+  </div>
+
+  <section id="eventsGrid" class="grid" aria-live="polite">
+    <!-- Event 1: ID aggiunto per ancoraggio -->
+    <article id="evento-battaglia-fantasma" class="event" data-title="La Battaglia Fantasma" data-place="Vingaldrum" data-tags="guerra,thalindra">
+      <div class="event-head">
+        <div class="event-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M14 3l7 7-4 4-7-7 4-4z" stroke="#4a2f16" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 21l6-6" stroke="#4a2f16" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div style="min-width:0;">
+          <h3 class="event-title">La Battaglia Fantasma</h3>
+          <div class="meta">Vingaldrum — <span class="muted">data ignota (era recente)</span></div>
+        </div>
+
+        <div class="chips" aria-hidden="true">
+          <span class="chip">guerra</span>
+          <span class="chip">Thalindra</span>
+        </div>
+      </div>
+
+      <p class="preview">Un conflitto che segnò la memoria della città: spiriti, sangue e l'origine del Kurkhael — l'Albero del Sangue.</p>
+
+      <details>
+        <summary>Leggi descrizione completa</summary>
+        <div class="implicazioni">
+          <h4>Descrizione</h4>
+          <p>La Battaglia Fantasma vide forze in lotta tra eserciti elfi e una manifestazione spettrale legata a Thalindra. Molte aree sacre vennero contaminate e l'Altarion cambiò per sempre il suo aspetto.</p>
+          <h4>Implicazioni</h4>
+          <ul>
+            <li>Comparsa del Kurkhael al centro dell'Altarion.</li>
+            <li>Aumento delle veglie e dei culti legati alla dea della natura.</li>
+            <li>Accresciuta presenza di studiosi e cultisti nelle zone sacrali.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- Event 2: ID aggiunto per ancoraggio -->
+    <article id="evento-esecuzione-talnoriel" class="event" data-title="L'Esecuzione di Tal Noriel" data-place="Vingaldrum" data-tags="politica,tradimento">
+      <div class="event-head">
+        <div class="event-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 7h8v10H4z" stroke="#4a2f16" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M12 7l4-4 4 4" stroke="#4a2f16" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <div style="min-width:0;">
+          <h3 class="event-title">L'Esecuzione di Tal'Noriel</h3>
+          <div class="meta">Vingaldrum — <span class="muted">data pubblica</span></div>
+        </div>
+
+        <div class="chips" aria-hidden="true">
+          <span class="chip">politica</span>
+          <span class="chip">Cappucci Grigi</span>
+        </div>
+      </div>
+
+      <p class="preview">Un evento che cambiò l'equilibrio politico: la morte pubblica di un leader e la dissoluzione dei suoi sostenitori.</p>
+
+      <details>
+        <summary>Leggi descrizione completa</summary>
+        <div class="implicazioni">
+          <h4>Descrizione</h4>
+          <p>Tal'Noriel fu giustiziato in Piazza Centrale dopo accuse di tradimento. L'episodio portò alla frammentazione della fazione dei Cappucci Grigi e a tensioni diplomatiche con Goldbrick.</p>
+          <h4>Implicazioni</h4>
+          <ul>
+            <li>Calo dell'influenza della fazione dei Cappucci Grigi.</li>
+            <li>Nuove leggi di sicurezza e controllo della città.</li>
+            <li>Rancori pubblici e faide locali.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- Altri eventi: duplica article.event e modifica data, titolo, luogo, tags e contenuti -->
   </section>
 
-  <section id="evento-esecuzione-talnoriel" class="event">
-    <h2>L'Esecuzione di Tal'Noriel</h2>
-    <p><strong>Luogo:</strong> Vingaldrum</p>
-    <p><strong>Descrizione:</strong> </p>
-    <p><strong>Implicazioni:</strong> </p>
-  </section>
-
-
-  <!-- Altri eventi -->
+  <div id="empty" class="empty" style="display:none">Nessun evento trovato con i criteri selezionati.</div>
 </main>
+
+<script>
+  // Leggero filtro client-side: ricerca libera + filtro luogo + toggle dettagli
+  (function(){
+    const qEl = document.getElementById('q');
+    const clearBtn = document.getElementById('clearBtn');
+    const filterPlace = document.getElementById('filterPlace');
+    const toggleView = document.getElementById('toggleView');
+    const grid = document.getElementById('eventsGrid');
+    const events = Array.from(grid.querySelectorAll('article.event'));
+    const empty = document.getElementById('empty');
+
+    function normalize(s){ return (s||'').toString().toLowerCase(); }
+
+    function applyFilter(){
+      const q = normalize(qEl.value);
+      const place = normalize(filterPlace.value);
+      let visibleCount = 0;
+
+      events.forEach(ev => {
+        const title = normalize(ev.dataset.title);
+        const placeData = normalize(ev.dataset.place);
+        const tags = normalize(ev.dataset.tags || '');
+        const preview = normalize(ev.querySelector('.preview')?.textContent || '');
+        const detailsText = normalize(ev.textContent || '');
+
+        const matchesQuery = q === '' || title.includes(q) || tags.includes(q) || preview.includes(q) || detailsText.includes(q);
+        const matchesPlace = place === '' || placeData === place;
+
+        if (matchesQuery && matchesPlace) {
+          ev.style.display = '';
+          visibleCount++;
+        } else {
+          ev.style.display = 'none';
+        }
+      });
+
+      empty.style.display = visibleCount === 0 ? '' : 'none';
+    }
+
+    qEl.addEventListener('input', applyFilter);
+    clearBtn.addEventListener('click', ()=>{ qEl.value=''; applyFilter(); qEl.focus(); });
+    filterPlace.addEventListener('change', applyFilter);
+
+    // toggle details open/close for all cards
+    let detailsOpen = false;
+    toggleView.addEventListener('click', ()=>{
+      detailsOpen = !detailsOpen;
+      events.forEach(ev=>{
+        const d = ev.querySelector('details');
+        if (!d) return;
+        if (detailsOpen) d.setAttribute('open','');
+        else d.removeAttribute('open');
+      });
+      toggleView.textContent = detailsOpen ? 'Chiudi dettagli' : 'Mostra/Nascondi dettagli';
+    });
+
+    // gestione hash / deep-linking:
+    function handleHash() {
+      const hash = (location.hash || '').replace(/^#/, '');
+      if (!hash) return;
+      // trova elemento con id
+      const target = document.getElementById(hash);
+      if (!target) return;
+      // assicurati che l'elemento sia visibile (rimuovi eventuali filtri)
+      qEl.value = '';
+      filterPlace.value = '';
+      applyFilter();
+
+      // apri il details interno se presente e scrolla al centro
+      const d = target.querySelector('details');
+      if (d) d.setAttribute('open','');
+
+      // scroll con offset per header sticky
+      const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+      const rect = target.getBoundingClientRect();
+      const absoluteY = window.scrollY + rect.top - headerOffset - 16; // 16px padd
+      window.scrollTo({ top: absoluteY, behavior: 'smooth' });
+
+      // evidenzia temporanea
+      target.animate([{ boxShadow: '0 0 0 0 rgba(212,175,55,0)' }, { boxShadow: '0 8px 30px rgba(212,175,55,0.12)' }], { duration: 900, easing: 'ease-out' });
+    }
+
+    // inizializza
+    applyFilter();
+
+    // esegui hash handling dopo un piccolo delay per permettere il render completo
+    window.addEventListener('load', ()=> setTimeout(handleHash, 120));
+    // anche quando hash cambia in sessione
+    window.addEventListener('hashchange', handleHash);
+  })();
+</script>
 
 </body>
 </html>
-
-
-
