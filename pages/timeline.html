@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Timeline - Campagna (DR)</title>
+<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cardo&display=swap" rel="stylesheet">
+<style>
+  /* Palette e header ereditati dalla pagina mappa */
+  :root{
+    --bg-paper: #f6f1e1;
+    --ink:#3b2f1c;
+    --accent-gold:#d4af37;
+    --header-bg:#5c3b1e;
+    --muted:#6b6b6b;
+    --accent-cool:#7dd3fc;
+  }
+  html,body{height:100%;}
+  body {
+    margin: 0;
+    font-family: 'Cardo', serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--bg-paper) url('parchment-bg.jpg') repeat;
+    color: var(--ink);
+    -webkit-font-smoothing:antialiased;
+  }
+
+  header {
+    background: var(--header-bg);
+    color: white;
+    padding: .6rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: 'MedievalSharp', cursive;
+    border-bottom: 4px solid var(--accent-gold);
+  }
+  header a{ color:#f3e5ab; text-decoration:none; font-weight:bold }
+  header a:hover{ text-decoration:underline; color:#ffd700 }
+  #menuToggle{ margin-left:auto; background: linear-gradient(#ffd97a,#d4af37); border:2px solid rgba(0,0,0,0.12); color:var(--ink); padding:.25rem .6rem; border-radius:6px; font-weight:bold; cursor:pointer }
+
+  /* Page layout */
+  .wrap{width:100%; max-width:1100px; margin:28px auto; padding:0 18px}
+  .panel{background:rgba(255,255,255,0.92); border:3px solid var(--accent-gold); border-radius:12px; padding:16px; box-shadow:0 8px 24px rgba(0,0,0,0.12)}
+  h1.title{font-family:'MedievalSharp',cursive; color:var(--header-bg); margin:0 0 6px 0}
+  p.lead{margin:0 0 12px 0; color:var(--muted)}
+
+  /* Controls */
+  .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+  .controls .input{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);background:transparent}
+  .btn{background:linear-gradient(#ffd97a,#d4af37); border:1px solid rgba(0,0,0,0.08); color:var(--ink); padding:8px 10px; border-radius:8px; font-size:13px; cursor:pointer}
+  .btn.ghost{background:transparent;border:1px dashed rgba(0,0,0,0.06); color:var(--header-bg)}
+
+  /* Timeline */
+  .timeline-wrap{display:grid;grid-template-columns:120px 1fr; gap:20px; align-items:start}
+  @media (max-width:760px){ .timeline-wrap{grid-template-columns:1fr} }
+
+  .year-col{display:flex;flex-direction:column;gap:20px;align-items:flex-end;padding-top:6px}
+  .year-bubble{background:var(--header-bg); color:white;padding:10px 12px;border-radius:8px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,0.12)}
+
+  .events-col{position:relative;padding-top:6px}
+  /* vertical line */
+  .events-col::before{content:"";position:absolute;left:8px;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--accent-cool), rgba(125,211,252,0.06));border-radius:2px;opacity:0.9}
+
+  .event{position:relative;margin-bottom:20px;padding:14px 16px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,248,240,0.95));border:1px solid rgba(0,0,0,0.06);box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+  .event::before{content:"";position:absolute;left:-36px;top:18px;width:18px;height:18px;border-radius:50%;background:var(--accent-gold);border:3px solid var(--bg-paper)}
+  .event h3{margin:0 0 6px 0;color:var(--header-bg)}
+  .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+  .desc{color:var(--ink);margin:0}
+
+  .event-actions{margin-top:10px;display:flex;gap:8px}
+  .small{font-size:13px;color:var(--muted)}
+
+  /* form area */
+  .bottom-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;border-top:1px dashed rgba(0,0,0,0.05);padding-top:12px}
+  .field{display:flex;flex-direction:column}
+  .field label{font-size:13px;margin-bottom:6px}
+  .field input, .field textarea{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);min-width:180px}
+  textarea{min-height:64px}
+
+  /* subtle transitions */
+  .event, .year-bubble{transition:transform .18s ease,box-shadow .18s ease}
+  .event:hover{transform:translateY(-4px);box-shadow:0 18px 34px rgba(0,0,0,0.12)}
+
+  /* utilities */
+  .right{margin-left:auto}
+  a.anchor-link{color:var(--muted);text-decoration:none;font-size:13px;margin-left:8px}
+
+</style>
+</head>
+<body>
+
+<header>
+  <a href="../index.html">Home</a>
+  <a href="personaggi.html">Personaggi</a>
+  <a href="lore.html">Lore</a>
+  <a href="mappa.html">Mappa</a>
+</header>
+
+<main class="wrap">
+  <section class="panel">
+    <h1 class="title">Timeline — Campagna (DR)</h1>
+    <p class="lead">Eventi ordinati cronologicamente.</p>
+
+    <div class="controls" role="toolbar" aria-label="Controlli timeline">
+      <button id="toggleOrder" class="btn">Ordine: Crescente</button>
+      <button id="expandAll" class="btn ghost">Espandi/Comprimi descrizioni</button>
+      <input id="search" class="input" placeholder="Cerca testo..." aria-label="Cerca eventi" />
+      <input id="yearMin" type="number" class="input" placeholder="Anno min" aria-label="Anno minimo" />
+      <input id="yearMax" type="number" class="input" placeholder="Anno massimo" />
+      <button id="applyFilter" class="btn ghost">Applica filtro</button>
+      <button id="clearFilter" class="btn ghost">Reset filtro</button>
+    </div>
+
+    <div class="timeline-wrap">
+      <div class="year-col" id="yearCol" aria-hidden="true"></div>
+      <div class="events-col" id="list" aria-live="polite"></div>
+    </div>
+
+    <form id="addForm" class="bottom-form" aria-label="Aggiungi evento">
+      <div class="field"><label for="iyear">Anno (DR)</label><input id="iyear" type="number" required /></div>
+      <div class="field"><label for="ititle">Titolo</label><input id="ititle" type="text" required /></div>
+      <div class="field" style="flex:1"><label for="idesc">Descrizione</label><textarea id="idesc"></textarea></div>
+      <div style="display:flex;align-items:flex-end;gap:8px"><button id="addBtn" class="btn">Aggiungi</button><button id="resetBtn" type="button" class="btn ghost">Reset</button></div>
+    </form>
+
+    <div class="small" style="margin-top:10px">I dati sono salvati localmente nel browser.</div>
+  </section>
+</main>
+
+<script>
+  // initial events (you provided these) — will be overridden by localStorage if present
+  const defaultEvents = [
+    {year:1216, title:"Nascita di Micar 'yraen", desc:"Micar viene alla luce nelle terre di..."},
+    {year:1359, title:"Distruzione della casa Oblodra", desc:"Una catastrofe che costrinse i superstiti a fuggire."},
+    {year:1365, title:"Arrivo dei superstiti Oblodra nel Nuovo Continente", desc:"I sopravvissuti cercano nuove terre."},
+    {year:1370, title:"Fondazione di Isothar", desc:"La città di Isothar viene fondata come avamposto."},
+    {year:1380, title:"Primi Eilistrei si stabiliscono vicino a Isothar", desc:"Un piccolo gruppo di devoti si insedia per praticare i loro riti."},
+    {year:1396, title:"Distruzione del villaggio degli Eilistrei", desc:"Forze in conflitto spazzano via il villaggio."},
+    {year:1509, title:"Prigionia a Velkynvelve", desc:"Un evento che segna profondamente alcuni personaggi."}
+  ];
+
+  const STORAGE_KEY = 'campaignTimeline_v1';
+  let events = loadEvents();
+  let ascending = true;
+  let filter = { q:'', min:null, max:null };
+
+  // DOM refs
+  const listEl = document.getElementById('list');
+  const yearCol = document.getElementById('yearCol');
+  const toggleBtn = document.getElementById('toggleOrder');
+  const expandBtn = document.getElementById('expandAll');
+  const searchEl = document.getElementById('search');
+  const yearMinEl = document.getElementById('yearMin');
+  const yearMaxEl = document.getElementById('yearMax');
+  const applyFilterBtn = document.getElementById('applyFilter');
+  const clearFilterBtn = document.getElementById('clearFilter');
+
+  // add form
+  const iyear = document.getElementById('iyear');
+  const ititle = document.getElementById('ititle');
+  const idesc = document.getElementById('idesc');
+  const addBtn = document.getElementById('addBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  // load from storage
+  function loadEvents(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw){ const parsed = JSON.parse(raw); if(Array.isArray(parsed)) return parsed; }
+    }catch(e){ console.warn('Storage load failed',e) }
+    return defaultEvents.slice();
+  }
+  function persist(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(events)); }
+
+  function render(){
+    // apply filter
+    const filtered = events.filter(ev=>{
+      if(filter.q){ const s=(ev.title+' '+(ev.desc||'')).toLowerCase(); if(!s.includes(filter.q.toLowerCase())) return false }
+      if(filter.min !== null && ev.year < filter.min) return false;
+      if(filter.max !== null && ev.year > filter.max) return false;
+      return true;
+    });
+
+    const sorted = filtered.slice().sort((a,b)=> ascending? a.year - b.year : b.year - a.year || a.title.localeCompare(b.title));
+
+    // build year column (unique years visible)
+    const years = [...new Set(sorted.map(e=>e.year))];
+    yearCol.innerHTML = years.map(y=> `<div class="year-bubble">${y} DR</div>` ).join('');
+
+    // build events column
+    listEl.innerHTML = '';
+    for(const ev of sorted){
+      const id = anchorId(ev);
+      const wrapper = document.createElement('div'); wrapper.className='event'; wrapper.id = id;
+      const h = document.createElement('h3'); h.textContent = ev.title;
+      const meta = document.createElement('div'); meta.className='meta'; meta.textContent = ev.year + ' — ' + (ev.tag || 'Evento cronologico');
+      const p = document.createElement('p'); p.className='desc'; p.textContent = ev.desc || '';
+
+      const actions = document.createElement('div'); actions.className='event-actions';
+      const aLink = document.createElement('a'); aLink.href = '#'+id; aLink.className='anchor-link'; aLink.textContent = 'link';
+
+      actions.appendChild(aLink);
+
+      wrapper.appendChild(h); wrapper.appendChild(meta); wrapper.appendChild(p); wrapper.appendChild(actions);
+      listEl.appendChild(wrapper);
+    }
+  }
+
+  // helper anchor id
+  function anchorId(ev){
+    // stable id from title+year
+    return 'ev-'+String(ev.year)+'-'+slug(ev.title);
+  }
+  function slug(s){ return String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,''); }
+
+  // controls
+  toggleBtn.addEventListener('click', ()=>{ ascending = !ascending; toggleBtn.textContent = 'Ordine: ' + (ascending? 'Crescente' : 'Decrescente'); render(); });
+  expandBtn.addEventListener('click', ()=>{ document.querySelectorAll('.desc').forEach(p=>{ p.style.display = p.style.display === 'none' ? 'block' : 'none'; }); });
+
+  applyFilterBtn.addEventListener('click', ()=>{ filter.q = searchEl.value.trim(); filter.min = yearMinEl.value? parseInt(yearMinEl.value,10):null; filter.max = yearMaxEl.value? parseInt(yearMaxEl.value,10):null; render(); });
+  clearFilterBtn.addEventListener('click', ()=>{ searchEl.value=''; yearMinEl.value=''; yearMaxEl.value=''; filter = {q:'',min:null,max:null}; render(); });
+
+  // add event
+  addBtn.addEventListener('click', (e)=>{ e.preventDefault(); const y = parseInt(iyear.value,10); const t = ititle.value.trim(); const d = idesc.value.trim(); if(!y||!t) return alert('Inserisci anno e titolo.'); events.push({year:y,title:t,desc:d}); persist(); render(); iyear.value=''; ititle.value=''; idesc.value=''; iyear.focus(); });
+  resetBtn.addEventListener('click', ()=>{ iyear.value=''; ititle.value=''; idesc.value=''; });
+
+  // simple anchor handling: when hash changes, scroll to element smoothly
+  window.addEventListener('hashchange', ()=>{ const id = location.hash.replace('#',''); if(!id) return; const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); });
+
+  // initial render
+  render();
+
+  // accessibility: keyboard shortcuts
+  window.addEventListener('keydown', (e)=>{
+    if(e.key === 'f' && (e.ctrlKey||e.metaKey)){ e.preventDefault(); searchEl.focus(); }
+  });
+
+</script>
+</body>
+</html>
