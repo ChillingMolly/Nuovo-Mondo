@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Timeline - Campagna (DR)</title>
+<title>Timeline - Campagna (DR) — FIXED</title>
 <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cardo&display=swap" rel="stylesheet">
 <style>
   /* Palette e header ereditati dalla pagina mappa */
@@ -55,7 +55,7 @@
 
   /* Timeline */
   .timeline-wrap{display:grid;grid-template-columns:120px 1fr; gap:20px; align-items:start}
-  @media (max-width:760px){ .timeline-wrap{grid-template-columns:1fr} }
+  @media (max-width:760px){ .timeline-wrap{grid-template-columns:1fr; gap:12px} }
 
   .year-col{display:flex;flex-direction:column;gap:20px;align-items:flex-end;padding-top:6px}
   .year-bubble{background:var(--header-bg); color:white;padding:10px 12px;border-radius:8px;font-weight:700;box-shadow:0 6px 16px rgba(0,0,0,0.12)}
@@ -73,12 +73,7 @@
   .event-actions{margin-top:10px;display:flex;gap:8px}
   .small{font-size:13px;color:var(--muted)}
 
-  /* form area */
-  .bottom-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;border-top:1px dashed rgba(0,0,0,0.05);padding-top:12px}
-  .field{display:flex;flex-direction:column}
-  .field label{font-size:13px;margin-bottom:6px}
-  .field input, .field textarea{padding:8px;border-radius:8px;border:1px solid rgba(0,0,0,0.06);min-width:180px}
-  textarea{min-height:64px}
+  /* form area (REMOVED) */
 
   /* subtle transitions */
   .event, .year-bubble{transition:transform .18s ease,box-shadow .18s ease}
@@ -87,6 +82,15 @@
   /* utilities */
   .right{margin-left:auto}
   a.anchor-link{color:var(--muted);text-decoration:none;font-size:13px;margin-left:8px}
+
+  /* MOBILE: hide year column and adapt markers/paddings so events line up nicely */
+  @media (max-width:760px){
+    .year-col{display:none}
+    .events-col{padding-left:0}
+    .events-col::before{left:20px}
+    .event{padding-left:48px}
+    .event::before{left:8px}
+  }
 
 </style>
 </head>
@@ -119,27 +123,22 @@
       <div class="events-col" id="list" aria-live="polite"></div>
     </div>
 
-    <form id="addForm" class="bottom-form" aria-label="Aggiungi evento">
-      <div class="field"><label for="iyear">Anno (DR)</label><input id="iyear" type="number" required /></div>
-      <div class="field"><label for="ititle">Titolo</label><input id="ititle" type="text" required /></div>
-      <div class="field" style="flex:1"><label for="idesc">Descrizione</label><textarea id="idesc"></textarea></div>
-      <div style="display:flex;align-items:flex-end;gap:8px"><button id="addBtn" class="btn">Aggiungi</button><button id="resetBtn" type="button" class="btn ghost">Reset</button></div>
-    </form>
+    <!-- FORM PER AGGIUNTA RIMOSSA: la funzione di aggiungere nuovi eventi è stata eliminata -->
 
-    <div class="small" style="margin-top:10px">I dati sono salvati localmente nel browser.</div>
+    
   </section>
 </main>
 
 <script>
-  // initial events (you provided these) — will be overridden by localStorage if present
+  // initial events
   const defaultEvents = [
-    {year:1216, title:"Nascita di Micar 'yraen", desc:"Micar viene alla luce nelle terre di..."},
-    {year:1359, title:"Distruzione della casa Oblodra", desc:"Una catastrofe che costrinse i superstiti a fuggire."},
-    {year:1365, title:"Arrivo dei superstiti Oblodra nel Nuovo Continente", desc:"I sopravvissuti cercano nuove terre."},
-    {year:1370, title:"Fondazione di Isothar", desc:"La città di Isothar viene fondata come avamposto."},
-    {year:1380, title:"Primi Eilistrei si stabiliscono vicino a Isothar", desc:"Un piccolo gruppo di devoti si insedia per praticare i loro riti."},
-    {year:1396, title:"Distruzione del villaggio degli Eilistrei", desc:"Forze in conflitto spazzano via il villaggio."},
-    {year:1509, title:"Prigionia a Velkynvelve", desc:"Un evento che segna profondamente alcuni personaggi."}
+    {year:1216, title:"Nascita di Micar'yraen", desc:""},
+    {year:1359, title:"Distruzione della casa Oblodra", desc:""},
+    {year:1365, title:"Arrivo dei superstiti Oblodra nel Nuovo Continente", desc:""},
+    {year:1370, title:"Fondazione di Isothar", desc:""},
+    {year:1380, title:"Primi Eilistrei si stabiliscono vicino a Isothar", desc:""},
+    {year:1396, title:"Distruzione del villaggio degli Eilistrei", desc:""},
+    {year:1509, title:"Micar è rinchiuso a Velkynvelve", desc:""}
   ];
 
   const STORAGE_KEY = 'campaignTimeline_v1';
@@ -157,13 +156,6 @@
   const yearMaxEl = document.getElementById('yearMax');
   const applyFilterBtn = document.getElementById('applyFilter');
   const clearFilterBtn = document.getElementById('clearFilter');
-
-  // add form
-  const iyear = document.getElementById('iyear');
-  const ititle = document.getElementById('ititle');
-  const idesc = document.getElementById('idesc');
-  const addBtn = document.getElementById('addBtn');
-  const resetBtn = document.getElementById('resetBtn');
 
   // load from storage
   function loadEvents(){
@@ -222,10 +214,6 @@
 
   applyFilterBtn.addEventListener('click', ()=>{ filter.q = searchEl.value.trim(); filter.min = yearMinEl.value? parseInt(yearMinEl.value,10):null; filter.max = yearMaxEl.value? parseInt(yearMaxEl.value,10):null; render(); });
   clearFilterBtn.addEventListener('click', ()=>{ searchEl.value=''; yearMinEl.value=''; yearMaxEl.value=''; filter = {q:'',min:null,max:null}; render(); });
-
-  // add event
-  addBtn.addEventListener('click', (e)=>{ e.preventDefault(); const y = parseInt(iyear.value,10); const t = ititle.value.trim(); const d = idesc.value.trim(); if(!y||!t) return alert('Inserisci anno e titolo.'); events.push({year:y,title:t,desc:d}); persist(); render(); iyear.value=''; ititle.value=''; idesc.value=''; iyear.focus(); });
-  resetBtn.addEventListener('click', ()=>{ iyear.value=''; ititle.value=''; idesc.value=''; });
 
   // simple anchor handling: when hash changes, scroll to element smoothly
   window.addEventListener('hashchange', ()=>{ const id = location.hash.replace('#',''); if(!id) return; const el = document.getElementById(id); if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); });
