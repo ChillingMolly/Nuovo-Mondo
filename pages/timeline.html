@@ -138,6 +138,7 @@
 
   // initial events (now with optional day/month fields)
   const defaultEvents = [
+    {year:160, month:'Flamerule', day:3, title:"Halaster crea Sottomonte", desc:""},
     {year:360, month:'Hammer', day:8, title:"Eryndra fonda Kurk", desc:""},
     {year:360, month:'Eleasis', day:21, title:"I Discendenti di Eryndra governano Kurk", desc:"Eryndra si sacrifica al Sangue della Terra"},
     {year:362, month:'Ches', day:28, title:"Rathmor il Profanatore attacca Kurk", desc:""},
@@ -154,9 +155,14 @@
     {year:1032, month:'Mirtul', day:14, title:"Fondazione Waterdeep", desc:""},
     {year:1180, month:'Tarsakh', day:29, title:"Sirius II Elendar governa Kurk", desc:""},
     {year:1216, month:'Hammer', day:12, title:"Nasce Im'lochar", desc:""},
+    {year:1241, month:'Alturiak', day:16, title:"Nasce Soluun Xibrindas", desc:""},
     {year:1248, month:'Uktar', day:18, title:"Le gilde prendono il controllo di Waterdeep", desc:"Guerre della gilda"},
     {year:1273, month:'Ches', day:30, title:"Vengono istituiti i primi Lord Mascherati di Waterdeep", desc:""},
     {year:1297, month:'Mirtul', day:13, title:"Nasce Valas Hune", desc:""},
+    {year:1320, month:'Flamerule', day:4, title:"Nasce Yvraeth Melarn", desc:""},
+    {year:1324, month:'Flamerule', day:23, title:"La Casa degli Xibrindas viene distrutta", desc:""},
+    {year:1325, month:'Kythorn', day:20, title:"Soluun e suo fratello entrano nella Bregan d'Aerthe", desc:""},
+    {year:1338, month:'Hammer', day:4, title:"Valas finisce nel Labirinto", desc:""},
     {year:1345, month:'Uktar', day:27, title:"Vengono istituiti i Pugni Fiammanti", desc:""},
     {year:1358, month:'Hammer', day:2, title:"Periodo dei Disordini", desc:""},
     {year:1359, month:'Tarsakh', day:3, title:"Distruzione della casa Oblodra", desc:""},
@@ -166,8 +172,11 @@
     {year:1380, month:'Kythorn', day:10, title:"Primi Eilistrei si stabiliscono vicino a Isothar", desc:""},
     {year:1381, month:'Alturiak', day:5, title:"Nasce Balok", desc:""},
     {year:1385, month:'Hammer', day:4, title:"Piaga della Magia", desc:""},
+    {year:1385, month:'Hammer', day:5, title:"Kimmuriel e Valas collaborano", desc:""},
     {year:1394, month:'Hammer', day:8, title:"Sirius III Elendar governa Kurk", desc:"Fine della dinastia degli Elendar"},
     {year:1396, month:'Flamerule', day:2, title:"Distruzione del villaggio degli Eilistrei", desc:""},
+    {year:1452, month:'Kythorn', day:19, title:"Yvraeth Melarn fonda la Legione delle Mille Fenditure", desc:""},
+    {year:1488, month:'Tarsakh', day:29, title:"Valas incontra Zaknafein", desc:""},
     {year:1509, month:'Marpenoth', day:20, title:"Micar è rinchiuso a Velkynvelve", desc:""},
     {year:1570, month:'Tarsakh', day:4, title:"Nasce Danvar", desc:""},
     {year:1570, month:'Ches', day:5, title:"Gundren Rockseeker ritrova la Caverna dell'Onda Tonante", desc:""},
@@ -178,11 +187,21 @@
     {year:1570, month:'Tarsakh', day:26, title:"Battaglia dell'Obelisco", desc:"Coincide con la sparizione di Dorendol"},
     {year:1573, month:'Flamerule', day:12, title:"Harbin istituisce il Consiglio Cittadino di Phandalin", desc:"Hjoldak, Sildar, Rivibbidel e Gundren"},
     {year:1566, month:'Ches', day:30, title:"Nasce Draxel", desc:""},
+    {year:1576, month:'Ches', day:14, title:"Iados abbandona i Segugi della Giustizia", desc:""},
+    {year:1577, month:'Flamerule', day:2, title:"Battaglia di Fort Mayor", desc:""},
+    {year:1577, month:'Flamerule', day:2, title:"Morte di Arthur", desc:""},
+    {year:1577, month:'Flamerule', day:10, title:"Otamiul viene ucciso da Zenith Goldeneye", desc:""},
+    {year:1577, month:'Flamerule', day:20, title:"Carlyle muore", desc:""},
+    {year:1577, month:'Eleasis', day:10, title:"Jade sparisce dai radar", desc:""},
+    {year:1578, month:'Alturiak', day:1, title:"Brenford diventa Governatore di Fost", desc:"Ufficialmente"},
+    {year:1586, month:'Hammer', day:4, title:"Fondazione Figli della Polvere Nera", desc:""},
     {year:1589, month:'Hammer', day:13, title:"Attacco a Velkynvelve", desc:""},
     {year:1591, month:'Alturiak', day:20, title:"Micar arriva nel Nuovo Continente", desc:""},
     {year:1591, month:'Marpenoth', day:12, title:"Battaglia Fantasma di Vingaldrum", desc:""},
     {year:1591, month:'Marpenoth', day:21, title:"Rathmor I governa Kurk", desc:""},
     {year:1591, month:'Marpenoth', day:28, title:"Esecuzione di Tal'Noriel a Vingaldrum", desc:"Istituzione della Festa della Corona, annuale."}
+    {year:1591, month:'Uktar', day:2, title:"Valas Hune arriva sul Nuovo Continente", desc:""},
+    {year:1591, month:'Uktar', day:27, title:"Soluun si converte al culto di Eilistraee", desc:""},
   ];
 
   const STORAGE_KEY = 'campaignTimeline_v1';
